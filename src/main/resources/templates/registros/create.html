@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Criar registros</title>
 </head>
 <body>
-    <p>Criar registros</p>
+    <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+        <form method="POST" action="/create">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control form-control-lg" aria-describedby="ajudaTitulo" id="titulo" name="titulo" >
+                <div id="ajudaTitulo" class="form-text">Registrar o motivo da visita</div>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status *</label>
+                <select required class="form-select form-select-lg mb-3" aria-label="Select" id="status" name="status">
+                    <option value="" selected>Selecione</option>
+                    <option value="0">Casa da Diana</option>
+                    <option value="1">Casa do Liam</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
