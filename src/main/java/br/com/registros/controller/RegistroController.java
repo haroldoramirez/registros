@@ -1,15 +1,25 @@
 package br.com.registros.controller;
 
+import br.com.registros.exception.RegraNegocioException;
 import br.com.registros.model.entity.Registro;
 import br.com.registros.model.dto.RegistroDTO;
+import br.com.registros.service.RegistroService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/registro")
+@RequestMapping("/registros")
 public class RegistroController {
+
+    private final RegistroService registroService;
+
+    public RegistroController(RegistroService registroService) {
+        this.registroService = registroService;
+    }
 
     @GetMapping("/criar")
     public String paginaCriar() {
@@ -26,10 +36,17 @@ public class RegistroController {
 
         final Registro registro = registroDTO.converterParaRegistro();
 
-        //Chamar service
-        //Registro usuarioCriado = criarUsuarioCasoDeUso.criar(registro);
+        try {
 
-        return "redirect:/registro/sucesso";
+            Registro registroSalvo = registroService.salvarRegistro(registro);
+
+            return "redirect:/registros/sucesso";
+
+        } catch (RegraNegocioException e) {
+
+            return "redirect:/registros/erro";
+
+        }
 
     }
 
