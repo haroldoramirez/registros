@@ -1,12 +1,14 @@
 package br.com.registros.controller;
 
-import br.com.registros.model.Registro;
-import br.com.registros.model.RegistroDTO;
+import br.com.registros.model.entity.Registro;
+import br.com.registros.model.dto.RegistroDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/registro")
 public class RegistroController {
 
     @GetMapping("/criar")
@@ -24,11 +26,11 @@ public class RegistroController {
 
         final Registro registro = registroDTO.converterParaRegistro();
 
-        System.out.println("Criado objeto registro apartir do registroDTO");
-        System.out.println("Título: " + registro.getTitulo());
-        System.out.println("Status: " + registro.isStatus());
+        //Chamar service
+        //Registro usuarioCriado = criarUsuarioCasoDeUso.criar(registro);
 
-        return "redirect:/sucesso";
+        return "redirect:/registro/sucesso";
+
     }
 
 }

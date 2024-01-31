@@ -1,5 +1,6 @@
-package br.com.registros.model;
+package br.com.registros.model.entity;
 
+import br.com.registros.model.enums.StatusRegistro;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +26,9 @@ public class Registro {
     @Column(name = "data_cadastro", updatable = false)
     private LocalDateTime dataCadastro;
 
-    @Column(name = "status", nullable = false)
-    private boolean status;
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private StatusRegistro status;
 
     @PrePersist
     public void prePersist() {
