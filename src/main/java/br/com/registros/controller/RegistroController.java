@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistroController {
 
-    @GetMapping("/create")
-    public String pageCreate() {
-        return "registros/create";
+    @GetMapping("/criar")
+    public String paginaCriar() {
+        return "registros/criar";
     }
 
-    @GetMapping("/success")
-    public String pageSuccess() {
-        return "registros/success";
+    @GetMapping("/sucesso")
+    public String paginaSucesso() {
+        return "registros/sucesso";
     }
 
-    @PostMapping("/create")
-    public String create(RegistroDTO registroDTO) {
+    @PostMapping("/criar")
+    public String criar(RegistroDTO registroDTO) {
 
         final Registro registro = registroDTO.converterParaRegistro();
 
@@ -28,7 +28,7 @@ public class RegistroController {
         System.out.println("Título: " + registro.getTitulo());
         System.out.println("Status: " + registro.isStatus());
 
-        return "redirect:/success";
+        return "redirect:/sucesso";
     }
 
 }
