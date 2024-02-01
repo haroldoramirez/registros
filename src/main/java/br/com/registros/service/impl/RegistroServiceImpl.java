@@ -7,6 +7,8 @@ import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class RegistroServiceImpl implements RegistroService {
 
@@ -32,6 +34,9 @@ public class RegistroServiceImpl implements RegistroService {
     @Transactional
     public Registro salvarRegistro(Registro registro) {
         validarRegistro(registro);
+
+        List<Registro> registroEncontrado = registroRepository.findByStatus(registro.getStatus().name());
+
         return registroRepository.save(registro);
     }
 

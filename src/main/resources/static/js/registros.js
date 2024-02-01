@@ -14,14 +14,22 @@ window.onload = function() {
         let titulo = formularioRegistro.titulo.value;
         let status = formularioRegistro.status.value;
 
-        if (titulo === "") {
-            titulo = visitaNormal;
+        if (status === "") {
+
+            alert("Selecione um status");
+
+        } else {
+
+            if (titulo === "") {
+                titulo = visitaNormal;
+            }
+
+            document.getElementById("paragrafoTitulo").innerHTML = titulo;
+            document.getElementById("paragrafoStatus").innerHTML = status;
+
+            modalConfirmacao.show();
+
         }
-
-        document.getElementById("paragrafoTitulo").innerHTML = titulo;
-        document.getElementById("paragrafoStatus").innerHTML = status;
-
-        modalConfirmacao.show();
 
     });
 
