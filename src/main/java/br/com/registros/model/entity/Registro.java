@@ -36,9 +36,4 @@ public class Registro {
     @Column(name = "longitude")
     private double longitude;
 
-    @PrePersist
-    public void prePersist() {
-        setDataCadastro(LocalDateTime.now());
-    }
-
 }

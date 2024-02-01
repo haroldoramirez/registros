@@ -1,5 +1,6 @@
 package br.com.registros.service.impl;
 
+import br.com.registros.exception.RegraNegocioException;
 import br.com.registros.model.entity.Registro;
 import br.com.registros.model.repository.RegistroRepository;
 import br.com.registros.service.RegistroService;
@@ -7,7 +8,10 @@ import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {
@@ -33,11 +37,22 @@ public class RegistroServiceImpl implements RegistroService {
     @Override
     @Transactional
     public Registro salvarRegistro(Registro registro) {
-        validarRegistro(registro);
 
-        List<Registro> registroEncontrado = registroRepository.findByStatus(registro.getStatus().name());
+        validarRegistro(registro);
+        registro.setDataCadastro(LocalDateTime.now());
+        Date dataCadastro = toDate(registro.getDataCadastro());
+        Registro registroEncontrado = registroRepository.findByStatusAndDataCadastro(registro.getStatus().name(), dataCadastro);
+
+        if (registroEncontrado != null) {
+            throw new RegraNegocioException("Já existe um registro com o mesmo status cadastro para o dia atual.");
+        }
 
         return registroRepository.save(registro);
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
     }
 
 }

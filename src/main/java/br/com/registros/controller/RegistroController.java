@@ -29,6 +29,11 @@ public class RegistroController {
         return "registros/sucesso";
     }
 
+    @GetMapping("/erro")
+    public String paginaErro() {
+        return "registros/erro";
+    }
+
     @PostMapping("/criar")
     public String criar(RegistroDTO registroDTO) {
 
