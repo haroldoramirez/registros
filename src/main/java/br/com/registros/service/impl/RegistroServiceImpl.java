@@ -3,11 +3,14 @@ package br.com.registros.service.impl;
 import br.com.registros.model.entity.Registro;
 import br.com.registros.model.repository.RegistroRepository;
 import br.com.registros.service.RegistroService;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {
+
+    private static final String TITULO_PADRAO = "Visita normal";
 
     private final RegistroRepository registroRepository;
 
@@ -19,8 +22,16 @@ public class RegistroServiceImpl implements RegistroService {
     }
 
     @Override
+    public void validarRegistro(Registro registro) {
+        if (StringUtils.isBlank(registro.getTitulo())) {
+            registro.setTitulo(TITULO_PADRAO);
+        }
+    }
+
+    @Override
     @Transactional
     public Registro salvarRegistro(Registro registro) {
+        validarRegistro(registro);
         return registroRepository.save(registro);
     }
 

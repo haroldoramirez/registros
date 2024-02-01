@@ -20,7 +20,7 @@ public class Registro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 150)
+    @Column(length = 150, nullable = false)
     private String titulo;
 
     @Column(name = "data_cadastro", updatable = false)
@@ -29,6 +29,12 @@ public class Registro {
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private StatusRegistro status;
+
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
 
     @PrePersist
     public void prePersist() {

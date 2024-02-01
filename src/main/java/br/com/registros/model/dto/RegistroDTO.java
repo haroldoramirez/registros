@@ -2,12 +2,10 @@ package br.com.registros.model.dto;
 
 import br.com.registros.model.entity.Registro;
 import br.com.registros.model.enums.StatusRegistro;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.*;
-
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -17,11 +15,15 @@ public class RegistroDTO {
 
     private String titulo;
     private StatusRegistro status;
+    private double latitude;
+    private double longitude;
 
     public Registro converterParaRegistro() {
         Registro registro = new Registro();
         registro.setTitulo(titulo);
         registro.setStatus(status);
+        registro.setLatitude(latitude);
+        registro.setLongitude(longitude);
         return registro;
     }
 }

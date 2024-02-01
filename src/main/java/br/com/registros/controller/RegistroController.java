@@ -1,11 +1,9 @@
 package br.com.registros.controller;
 
 import br.com.registros.exception.RegraNegocioException;
-import br.com.registros.model.entity.Registro;
 import br.com.registros.model.dto.RegistroDTO;
+import br.com.registros.model.entity.Registro;
 import br.com.registros.service.RegistroService;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

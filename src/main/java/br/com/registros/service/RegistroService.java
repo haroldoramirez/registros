@@ -6,4 +6,6 @@ public interface RegistroService {
 
     Registro salvarRegistro(Registro registro);
 
+    void validarRegistro(Registro registro);
+
 }

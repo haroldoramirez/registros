@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Criar registros</title>
 </head>
 <body>
     <div class="container min-vh-100 d-flex justify-content-center align-items-center">
-        <form method="post" th:action="@{/registros/criar}">
+        <form id="formularioRegistro" method="post" th:action="@{/registros/criar}">
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" class="form-control form-control-lg" aria-describedby="ajudaTitulo" id="titulo" name="titulo" >
@@ -17,13 +19,34 @@
                 <label for="status" class="form-label">Status *</label>
                 <select required class="form-select form-select-lg mb-3" aria-label="Select" id="status" name="status">
                     <option value="" selected>Selecione</option>
-                    <option value="DIANA">Casa da Diana</option>
-                    <option value="LIAM">Casa do Liam</option>
+                    <option value="DIANA">1 - Casa da Diana</option>
+                    <option value="LIAM">2 - Casa do Liam</option>
+                    <option value="PASSEIO">3 - Passeio</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button id="registrar" name="registrar" type="button" class="btn btn-primary">Registrar</button>
         </form>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmarRegistro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmarRegistroLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarRegistroLabel">Confirmar cadastro de visita?</h5>
+                </div>
+                <div class="modal-body">
+                    Deseja registrar a visita com Título: 123 e Status: PASSEIO?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    <button id="confirmar" type="button" class="btn btn-primary">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/registros.js"></script>
 </body>
 </html>
