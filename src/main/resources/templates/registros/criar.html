@@ -24,7 +24,9 @@
                     <option value="PASSEIO">3 - Passeio</option>
                 </select>
             </div>
-            <button id="registrar" name="registrar" type="button" class="btn btn-primary">Registrar</button>
+            <input hidden value="-25.477616" type="text" class="form-control form-control-lg" aria-describedby="ajudaTitulo" id="latitude" name="latitude" >
+            <input hidden value="-54.559863" type="text" class="form-control form-control-lg" aria-describedby="ajudaTitulo" id="longitude" name="longitude" >
+            <button id="registrar" name="registrar" type="button" class="btn btn-success">Registrar</button>
         </form>
     </div>
 
@@ -33,10 +35,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmarRegistroLabel">Confirmar cadastro de visita?</h5>
+                    <h5 class="modal-title" id="confirmarRegistroLabel">Confirmar o cadastro da visita?</h5>
                 </div>
                 <div class="modal-body">
-                    Deseja registrar a visita com Título: 123 e Status: PASSEIO?
+                    <label>Título:</label>
+                    <p id="paragrafoTitulo"></p>
+                    <label>Status:</label>
+                    <p id="paragrafoStatus"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
