@@ -1,5 +1,7 @@
 window.onload = function() {
 
+    let visitaNormal = "Visita normal";
+
     const abrirModalConfirmacao = document.getElementById("registrar");
     const confirmarRegistro = document.getElementById("confirmar");
 
@@ -9,13 +11,13 @@ window.onload = function() {
 
         let formularioRegistro = document.getElementById("formularioRegistro");
 
-        console.log("titulo", formularioRegistro.titulo.value);
-        console.log("status", formularioRegistro.status.value);
-        console.log("latitude", formularioRegistro.latitude.value);
-        console.log("longitude", formularioRegistro.longitude.value);
-
         let titulo = formularioRegistro.titulo.value;
         let status = formularioRegistro.status.value;
+
+        if (titulo === "") {
+            titulo = visitaNormal;
+        }
+
         document.getElementById("paragrafoTitulo").innerHTML = titulo;
         document.getElementById("paragrafoStatus").innerHTML = status;
 
