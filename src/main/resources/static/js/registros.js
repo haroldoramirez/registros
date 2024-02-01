@@ -16,7 +16,8 @@ window.onload = function() {
 
         if (status === "") {
 
-            alert("Selecione um status");
+            alert("Selecione um Local");
+            document.getElementById("status").focus();
 
         } else {
 
