@@ -38,13 +38,21 @@ public class RegistroController {
         ModelAndView mv = new ModelAndView("registros/listar");
         List<Registro> registros = registroService.findAll();
         List<RegistroListDTO> registrosDTO = new ArrayList<>();
+        String textoStatus = "";
 
         for (Registro registro : registros) {
             RegistroListDTO registroDTO = new RegistroListDTO();
 
             registroDTO.setTitulo(registro.getTitulo());
-            registroDTO.setStatus(registro.getStatus());
             registroDTO.setDataCadastro(formatarLocalDateTime(registro.getDataCadastro(), formatoDesejado));
+
+            textoStatus = switch (registro.getStatus()) {
+                case DIANA -> "Visita na casa da Diana";
+                case LIAM -> "Visita na casa do Liam";
+                default -> "Passeio";
+            };
+
+            registroDTO.setStatus(textoStatus);
 
             registrosDTO.add(registroDTO);
         }
@@ -82,7 +90,7 @@ public class RegistroController {
 
     }
 
-    public static String formatarLocalDateTime(LocalDateTime localDateTime, String formato) {
+    private static String formatarLocalDateTime(LocalDateTime localDateTime, String formato) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
         return localDateTime.format(formatter);
     }
