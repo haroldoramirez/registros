@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class RegistroServiceImpl implements RegistroService {
 
     private static final String TITULO_PADRAO = "Visita normal";
+    private String formatoDesejado = "dd/MM/yyyy";
 
     private final RegistroRepository registroRepository;
 
@@ -50,7 +52,7 @@ public class RegistroServiceImpl implements RegistroService {
         Registro registroEncontrado = registroRepository.findByStatusAndDataCadastro(registro.getStatus().name(), dataCadastro);
 
         if (registroEncontrado != null) {
-            throw new RegraNegocioException("Já existe um registro com o mesmo status cadastro para o dia atual.");
+            throw new RegraNegocioException("Já existe um registro para o dia " + formatarLocalDateTime(registroEncontrado.getDataCadastro(), formatoDesejado) + " com o status " + registroEncontrado.getStatus());
         }
 
         return registroRepository.save(registro);
@@ -59,6 +61,11 @@ public class RegistroServiceImpl implements RegistroService {
     public static Date toDate(LocalDateTime localDateTime) {
         Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
+    }
+
+    private static String formatarLocalDateTime(LocalDateTime localDateTime, String formato) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
+        return localDateTime.format(formatter);
     }
 
 }

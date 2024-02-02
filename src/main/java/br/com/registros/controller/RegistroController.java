@@ -4,6 +4,7 @@ import br.com.registros.exception.RegraNegocioException;
 import br.com.registros.model.dto.RegistroDTO;
 import br.com.registros.model.dto.RegistroListDTO;
 import br.com.registros.model.entity.Registro;
+import br.com.registros.model.enums.StatusRegistro;
 import br.com.registros.service.RegistroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.registros.model.enums.StatusRegistro.DIANA;
+import static br.com.registros.model.enums.StatusRegistro.LIAM;
+
 @Controller
 @RequestMapping("/registros")
 public class RegistroController {
 
     private final RegistroService registroService;
 
-    String formatoDesejado = "dd/MM/yyyy HH:mm:ss";
+    private String formatoDesejado = "dd/MM/yyyy HH:mm:ss";
 
     public RegistroController(RegistroService registroService) {
         this.registroService = registroService;
@@ -38,7 +42,6 @@ public class RegistroController {
         ModelAndView mv = new ModelAndView("registros/listar");
         List<Registro> registros = registroService.findAll();
         List<RegistroListDTO> registrosDTO = new ArrayList<>();
-        String textoStatus = "";
 
         for (Registro registro : registros) {
             RegistroListDTO registroDTO = new RegistroListDTO();
@@ -46,13 +49,7 @@ public class RegistroController {
             registroDTO.setTitulo(registro.getTitulo());
             registroDTO.setDataCadastro(formatarLocalDateTime(registro.getDataCadastro(), formatoDesejado));
 
-            textoStatus = switch (registro.getStatus()) {
-                case DIANA -> "Visita na casa da Diana";
-                case LIAM -> "Visita na casa do Liam";
-                default -> "Passeio";
-            };
-
-            registroDTO.setStatus(textoStatus);
+            registroDTO.setStatus(formatarStatus(registro.getStatus()));
 
             registrosDTO.add(registroDTO);
         }
@@ -72,19 +69,27 @@ public class RegistroController {
     }
 
     @PostMapping("/criar")
-    public String criar(RegistroDTO registroDTO) {
+    public ModelAndView criar(RegistroDTO registroDTO) {
 
         final Registro registro = registroDTO.converterParaRegistro();
 
         try {
 
+            ModelAndView mv = new ModelAndView("registros/sucesso");
+
             Registro registroSalvo = registroService.salvarRegistro(registro);
 
-            return "redirect:/registros/sucesso";
+            mv.addObject("registroSalvo", registroSalvo);
+
+            return mv;
 
         } catch (RegraNegocioException e) {
 
-            return "redirect:/registros/erro";
+            ModelAndView mv = new ModelAndView("registros/erro");
+
+            mv.addObject("mensagem", e.getMessage());
+
+            return mv;
 
         }
 
@@ -93,6 +98,20 @@ public class RegistroController {
     private static String formatarLocalDateTime(LocalDateTime localDateTime, String formato) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
         return localDateTime.format(formatter);
+    }
+
+    private static String formatarStatus(StatusRegistro status) {
+
+        String textoStatus = "";
+
+        textoStatus = switch (status) {
+            case DIANA -> "Visita na casa da Diana";
+            case LIAM -> "Visita na casa do Liam";
+            default -> "Passeio";
+        };
+
+        return textoStatus;
+
     }
 
 }
