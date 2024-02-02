@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {
@@ -25,6 +26,11 @@ public class RegistroServiceImpl implements RegistroService {
         super();
         this.registroRepository = registroRepository;
 
+    }
+
+    @Override
+    public List<Registro> findAll() {
+        return registroRepository.findAll();
     }
 
     @Override

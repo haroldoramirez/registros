@@ -4,6 +4,7 @@ window.onload = function() {
 
     const abrirModalConfirmacao = document.getElementById("registrar");
     const confirmarRegistro = document.getElementById("confirmar");
+    const listarRegistros = document.getElementById("listar");
 
     let modalConfirmacao = new bootstrap.Modal(document.getElementById("confirmarRegistro"));
 
@@ -34,22 +35,58 @@ window.onload = function() {
 
     });
 
-    confirmarRegistro.addEventListener('click', function () {
-
-        console.log("confirmarRegistro");
-
-        // Obtém o formulário
-        let formulario = document.getElementById('formularioRegistro');
-
-        // Realiza o submit do formulário
-        formulario.submit();
-
+    listarRegistros.addEventListener('click', function () {
+        window.location.href = "/registros/listar";
     });
 
+    confirmarRegistro.addEventListener('click', function () {
+        obterLocalizacao();
+    });
+
+    function obterLocalizacao() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+
+                    document.getElementById("latitude").value = latitude;
+                    document.getElementById("longitude").value = longitude;
+
+                    enviarFormulario();
+
+                },
+                function(error) {
+                    // Erro ao obter a localização
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("Permissão para obter a localização negada pelo usuário.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Informações de localização não disponíveis.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("Tempo limite expirado ao obter a localização.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("Erro desconhecido ao obter a localização.");
+                            break;
+                    }
+                }
+            );
+        } else {
+            alert("Seu navegador não suporta a API de Geolocalização.");
+        }
+    }
+
+    function enviarFormulario() {
+        let formulario = document.getElementById('formularioRegistro');
+        formulario.submit();
+    }
+
     function fecharModal() {
-
         modalConfirmacao.hide();
-
     }
 
 }
