@@ -2,6 +2,7 @@ package br.com.registros.service.impl;
 
 import br.com.registros.exception.RegraNegocioException;
 import br.com.registros.model.entity.Registro;
+import br.com.registros.model.entity.TotalRegistros;
 import br.com.registros.model.repository.RegistroRepository;
 import br.com.registros.service.RegistroService;
 import io.micrometer.common.util.StringUtils;
@@ -19,7 +20,6 @@ import java.util.List;
 public class RegistroServiceImpl implements RegistroService {
 
     private static final String TITULO_PADRAO = "Visita normal";
-    private String formatoDesejado = "dd/MM/yyyy";
 
     private final RegistroRepository registroRepository;
 
@@ -43,6 +43,11 @@ public class RegistroServiceImpl implements RegistroService {
     }
 
     @Override
+    public List<TotalRegistros> contarRegistrosPorStatus() {
+        return registroRepository.contarRegistrosPorStatus();
+    }
+
+    @Override
     @Transactional
     public Registro salvarRegistro(Registro registro) {
 
@@ -52,6 +57,7 @@ public class RegistroServiceImpl implements RegistroService {
         Registro registroEncontrado = registroRepository.findByStatusAndDataCadastro(registro.getStatus().name(), dataCadastro);
 
         if (registroEncontrado != null) {
+            String formatoDesejado = "dd/MM/yyyy";
             throw new RegraNegocioException("Já existe um registro para o dia " + formatarLocalDateTime(registroEncontrado.getDataCadastro(), formatoDesejado) + " com o status " + registroEncontrado.getStatus());
         }
 

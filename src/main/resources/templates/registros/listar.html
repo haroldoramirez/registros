@@ -10,26 +10,43 @@
 <body>
 
     <div class="container">
-
-        <h3>Lista das visitas realizadas</h3>
+        <div class="container px-4 py-5" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">Lista das visitas realizadas</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div data-th-each="totalQuantidade : ${totalQuantidadeStatus}" class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+                    </div>
+                    <div>
+                        <h2 data-th-text="${totalQuantidade.status}">...</h2>
+                        <h3 data-th-text="${totalQuantidade.quantidade}">...</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <button type="button" class="btn btn-primary" onclick="voltar()">Voltar</button>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Título</th>
-                <th scope="col">Status</th>
-                <th scope="col">Data da visita</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-th-each="registro : ${registros}">
-                <td data-th-text="${registro.titulo}">...</td>
-                <td data-th-text="${registro.status}">...</td>
-                <td data-th-text="${registro.dataCadastro}">...</td>
-            </tr>
-            </tbody>
-        </table>
+
+        <div class="row">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Data da visita</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="registro : ${registros}">
+                    <td data-th-text="${registro.titulo}">...</td>
+                    <td data-th-text="${registro.status}">...</td>
+                    <td data-th-text="${registro.dataCadastro}">...</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
 
     </div>
 
