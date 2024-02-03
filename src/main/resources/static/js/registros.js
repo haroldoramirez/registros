@@ -14,6 +14,7 @@ window.onload = function() {
 
         let titulo = formularioRegistro.titulo.value;
         let status = formularioRegistro.status.value;
+        let textoStatus = "";
 
         if (status === "") {
 
@@ -26,8 +27,19 @@ window.onload = function() {
                 titulo = visitaNormal;
             }
 
+            switch(status) {
+              case 'DIANA':
+                textoStatus = "Casa da Diana"
+                break;
+              case 'LIAM':
+                textoStatus = "Casa do Liam"
+                break;
+              default:
+                textoStatus = "Passeio"
+            }
+
             document.getElementById("paragrafoTitulo").innerHTML = titulo;
-            document.getElementById("paragrafoStatus").innerHTML = status;
+            document.getElementById("paragrafoStatus").innerHTML = textoStatus;
 
             modalConfirmacao.show();
 

@@ -3,6 +3,7 @@ package br.com.registros.service.impl;
 import br.com.registros.exception.RegraNegocioException;
 import br.com.registros.model.entity.Registro;
 import br.com.registros.model.entity.TotalRegistros;
+import br.com.registros.model.enums.StatusRegistro;
 import br.com.registros.model.repository.RegistroRepository;
 import br.com.registros.service.RegistroService;
 import io.micrometer.common.util.StringUtils;
@@ -58,13 +59,13 @@ public class RegistroServiceImpl implements RegistroService {
 
         if (registroEncontrado != null) {
             String formatoDesejado = "dd/MM/yyyy";
-            throw new RegraNegocioException("Já existe um registro para o dia " + formatarLocalDateTime(registroEncontrado.getDataCadastro(), formatoDesejado) + " com o status " + registroEncontrado.getStatus());
+            throw new RegraNegocioException("Já existe um registro para o dia: " + formatarLocalDateTime(registroEncontrado.getDataCadastro(), formatoDesejado) + " com o status: " + formatarStatus(registroEncontrado.getStatus()));
         }
 
         return registroRepository.save(registro);
     }
 
-    public static Date toDate(LocalDateTime localDateTime) {
+    private static Date toDate(LocalDateTime localDateTime) {
         Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
     }
@@ -72,6 +73,20 @@ public class RegistroServiceImpl implements RegistroService {
     private static String formatarLocalDateTime(LocalDateTime localDateTime, String formato) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
         return localDateTime.format(formatter);
+    }
+
+    private static String formatarStatus(StatusRegistro status) {
+
+        String textoStatus = "";
+
+        textoStatus = switch (status) {
+            case DIANA -> "Visita na casa da Diana";
+            case LIAM -> "Visita na casa do Liam";
+            default -> "Passeio";
+        };
+
+        return textoStatus;
+
     }
 
 }
