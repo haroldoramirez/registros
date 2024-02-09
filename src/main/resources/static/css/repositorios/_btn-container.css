@@ -1,0 +1,54 @@
+.custom-repositorio-documentos-negocio-portlet .btn-container {
+  text-align: center;
+}
+
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn,
+#custom-documento-negocio-modal .modal-footer button.btn {
+  border: 2px solid #00a091;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  padding: 8px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 160px;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-footer button.btn {
+    width: 100%;
+  }
+}
+
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn:hover,
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn:focus,
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn:not(:disabled):not(.disabled):active,
+#custom-documento-negocio-modal .modal-footer button.btn:hover,
+#custom-documento-negocio-modal .modal-footer button.btn:focus,
+#custom-documento-negocio-modal .modal-footer button.btn:not(:disabled):not(.disabled):active {
+  border-color: #00a091 !important;
+}
+
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn.btn-primary,
+#custom-documento-negocio-modal .modal-footer button.btn.btn-primary {
+  background-color: #00a091 !important;
+  border-color: #00a091 !important;
+  color: #FFFFFF !important;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.custom-repositorio-documentos-negocio-portlet .btn-container button.btn.btn-secondary,
+#custom-documento-negocio-modal .modal-footer button.btn.btn-secondary {
+  background: #FFFFFF;
+  color: #00A091;
+  margin-left: 2.5641%;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-footer button.btn.btn-secondary {
+    margin-top: 16px;
+    margin-left: 0;
+  }
+}

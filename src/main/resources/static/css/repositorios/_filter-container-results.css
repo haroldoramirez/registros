@@ -1,0 +1,122 @@
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table,
+#custom-documento-negocio-modal .modal-body table {
+  border: 0;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .custom-repositorio-documentos-negocio-portlet .filter-container-results {
+    overflow-y: auto;
+    padding-bottom: 16px;
+  } 
+
+  .custom-repositorio-documentos-negocio-portlet .filter-container-results table {
+    min-width: 720px;
+    margin-top: 80px;
+  } 
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table thead,
+#custom-documento-negocio-modal .modal-body table thead {
+  font-size: 14px;
+  line-height: 16px;
+  color: #7C8593;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table thead {
+    font-size: 12px;
+  }
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table thead tr th {
+  border-top: 1px solid rgba(124, 133, 147, 0.1) !important;
+  border-left: 0;
+  padding: 12px 20px;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results .table-title {
+  border-top: 1px solid rgba(124, 133, 147, 0.1) !important;
+  color: #7c8593;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results .table-title svg,
+.custom-repositorio-documentos-negocio-portlet .filter-container-results .table-title span {
+  vertical-align: middle;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody,
+#custom-documento-negocio-modal .modal-body table tbody {
+  font-size: 12px;
+  font-weight: 700; 
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table tbody {
+    font-size: 10px;
+  }
+}
+
+.firefox .custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody,
+.firefox #custom-documento-negocio-modal .modal-body table tbody {
+  font-family: "Lato Regular";
+  font-weight: 400;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody tr td,
+#custom-documento-negocio-modal .modal-body table tbody tr td {
+  border-top: 1px solid #F2F3F4;
+  border-left: 0;
+  padding: 12px 20px;
+  vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table tbody tr td {
+    padding: 12px;
+  }
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody tr td a {
+  font-size: 12px;
+  line-height: 14px;
+  color: #00A091;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody tr td a svg {
+  float: left;
+  margin: 2px 4px 0 0;
+}
+
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody tr td a:hover {
+  text-decoration: none;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody tr:last-child td,
+#custom-documento-negocio-modal .modal-body table tbody tr:last-child td {
+  border-bottom: 1px solid #F2F3F4;
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tbody > tr:nth-child(odd) > td,
+#custom-documento-negocio-modal .modal-body table tbody > tr:nth-child(odd) > td {
+  background-color: rgba(124, 133, 147, 0.05);
+}
+
+.custom-repositorio-documentos-negocio-portlet .filter-container-results table tfoot tr td {
+  border-bottom: 1px solid #F2F3F4;
+  color: #7C8593;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.custom-repositorio-documentos-negocio-portlet .lfr-search-container {
+  margin: 0;
+}

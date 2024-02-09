@@ -1,0 +1,282 @@
+/* CUSTOMIZAÇÃO DA MODAL PARA SALVAMENTO */
+
+#custom-documento-negocio-modal {
+  border-radius: 52px !important;
+  margin-left: -400px;
+  top: 8%;
+  width: 800px;
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+  #custom-documento-negocio-modal {
+    margin-left: -46%;
+    width: 92%;
+  }
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal {
+    margin-left: 0;
+    width: 88%;
+  }
+}
+
+#custom-documento-negocio-modal .modal-header {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  text-align: center;
+}
+
+#custom-documento-negocio-modal .modal-header h5 {
+  color: #003B45;
+  font-family: 'Lato Regular';
+  font-size: 30px;
+  line-height: 34px;
+  margin: 0;
+  padding: 40px 48px 0 48px;
+}
+
+#custom-documento-negocio-modal .modal-header h6 {
+  color: #003B45;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 18px;
+  margin: 0;
+  padding: 12px 48px 40px 48px;
+}
+
+#custom-documento-negocio-modal .modal-header button {
+  background: #DADADA;
+  border-radius: 50%;
+  color: #272626;
+  font-size: 36px;
+  height: 44px;
+  margin: -44px -44px 0 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 44px;
+}
+
+#custom-documento-negocio-modal .modal-header span {
+  font-family: 'Lato Regular';
+  margin-left: 2px;
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+  #custom-documento-negocio-modal .modal-header button {
+    box-shadow: -2px 2px 8px -2px rgba(0, 0, 0, 0.2);
+    margin: -8px -8px 0 0;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-header h5 {
+    font-size: 26px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #custom-documento-negocio-modal .modal-header h6 {
+    font-size: 14px;
+    line-height: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #custom-documento-negocio-modal .modal-header button {
+    box-shadow: -2px 2px 8px -2px rgba(0, 0, 0, 0.2);
+    margin: -8px -8px 0 0;
+    padding: 8px;
+  }
+}
+
+#custom-documento-negocio-modal .modal-body {
+  margin: 0;
+  padding: 0 48px;
+  max-height: 23vmax;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+#custom-documento-negocio-modal form {
+  margin: 0;
+}
+
+#custom-documento-negocio-modal .modal-body select {
+  width: 250px;
+}
+
+#custom-documento-negocio-modal .modal-body input[type="file"] {
+  border: 1px dashed #7C8593;
+  border-radius: 4px;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  line-height: initial;
+  outline: none;
+  width: 100%;
+}
+
+#custom-documento-negocio-modal .modal-body input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+  display: none;
+}
+
+#custom-documento-negocio-modal .modal-body input[type="file"]::before {
+  -webkit-user-select: none;
+  color: #7C8593;
+  content: 'Clique ou arraste os arquivos para envio';
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 16px;
+  outline: none;
+  padding: 24px 0;
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+  width: 100%;
+}
+
+#custom-documento-negocio-modal .modal-body input[type="file"]:hover::before {
+  background-color: rgba(124, 133, 147, 0.05);
+}
+
+.firefox #custom-documento-negocio-modal .modal-body input[type="file"]::file-selector-button {
+  background-color: transparent;
+  border: 0;
+  color: #7C8593;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 24px 0;
+  width: 100%;
+}
+
+#custom-documento-negocio-modal .modal-body select[disabled],
+#custom-documento-negocio-modal .modal-body input[disabled],
+#custom-documento-negocio-modal .modal-body input[disabled]::before {
+  cursor: not-allowed;
+  background-color: #eee;
+  color: #6c6c6c;
+  opacity: 0.7;
+  border-color: #e3e4e8;
+}
+
+#custom-documento-negocio-modal .modal-body input[disabled]:hover::before {
+  background-color: transparent;
+}
+
+#custom-documento-negocio-modal .modal-body table thead tr th {
+  padding: 12px 20px;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table thead tr th {
+    padding: 12px;
+  }
+}
+
+#custom-documento-negocio-modal .modal-body #mensagem-info-modal {
+  text-align: center;
+}
+
+#custom-documento-negocio-modal .modal-body #mensagem-info-arquivo-repetido-modal {
+  text-align: center;
+}
+
+#custom-documento-negocio-modal .modal-body table tbody tr td button {
+  background: transparent;
+  border: 0;
+  color: #EB5757;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table tbody tr td button {
+    font-size: 10px;
+    padding: 0;
+  }
+}
+
+#custom-documento-negocio-modal .modal-body table tbody tr td button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+#custom-documento-negocio-modal .modal-body table tbody tr td button svg {
+  float: left;
+  margin: -1px 4px 0 0;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-body table tbody tr td button span {
+    display: none;
+  }
+}
+
+#custom-documento-negocio-modal .modal-footer {
+  background: transparent;
+  border: 0;
+  max-height: 52px;
+  padding: 32px 48px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  #custom-documento-negocio-modal .modal-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-height: initial;
+  }
+}
+
+#custom-documento-negocio-modal .modal-footer button svg {
+  animation: loading-spinner 1.3s linear infinite;
+  float: left;
+}
+
+#custom-documento-negocio-modal .modal-footer button span {
+  margin: 2px 0 0 4px;
+  display: inline-block;
+}
+
+#custom-documento-negocio-modal .modal-footer #mensagemEnvio {
+  font-size: 12px;
+  line-height: 14px;
+  color: #00A091;
+  margin: 8px 0 0 0;
+}
+
+#custom-documento-negocio-modal .modal-footer #mensagemSucesso {
+  font-size: 12px;
+  line-height: 14px;
+  color: #00A091;
+  margin: 8px 0 0 0;
+}
+
+#custom-documento-negocio-modal .modal-footer #mensagemErro {
+  font-size: 12px;
+  line-height: 14px;
+  color: #EB5757;
+  margin: 8px 0 0 0;
+}
+
+@keyframes loading-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

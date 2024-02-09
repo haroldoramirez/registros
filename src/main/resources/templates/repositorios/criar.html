@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../css/repositorios/main.css" rel="stylesheet">
+    <title>Repositórios Upload</title>
+</head>
+<body>
+<div class="container">
+    <main class="custom-repositorio-documentos-negocio-portlet">
+        <div class="wrapper">
+            <div class="container-title">
+                <h2>Repositórios Upload</h2>
+                <h3>Preencha os campos abaixo para apresentar os documentos conforme filtro realizado.</h3>
+            </div>
+            <div class="filter-container-search">
+                <div class="row-fluid">
+                    <form id="filtroDocumentoForm" autocomplete="off">
+                        <div class="span4">
+                            <div id="selectCentral">
+                                <label for="centrais">Central <span>*</span></label>
+                                <select id="centrais" name="centrais">
+                                    <option value="">Selecione a Central desejada</option>
+                                    <option value="1000">
+                                        1000
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <label for="tipoDocumentos">Tipo de documento <span>*</span></label>
+                            <select id="tipoDocumentos" name="tipoDocumentos">
+                                <option value="">Selecione um Tipo de Documento</option>
+                                <option value="1">
+                                    Administração
+                                </option>
+                            </select>
+                        </div>
+                        <div class="span1">
+                            <button type="submit" id="filtrar" name="filtrar" class="btn btn-primary">
+                                Filtrar
+                            </button>
+                            <button id="inserirDocumentos" name="inserirDocumentos" class="btn btn-primary" type="button" onclick="openUploadModal()">
+                                <span>Inserir documentos</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="arquivosRepositorio" class="filter-container-results" style='display: none;'>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="table-title" scope="col" colspan="9">
+                            <span>Documentos</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nome do arquivo</th>
+                        <th>Tipo de documento</th>
+                        <th>Central</th>
+                        <th>Cooperativa</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="formUploadFile" name="formUploadFile" action="javascript:void(0);" onsubmit="enviarDados();" enctype="multipart/form-data" method="POST" >
+                    <div class="modal-header">
+                        <h5>Inserir documentos</h5>
+                        <h6>Preencha as informações abaixo para inserção dos documentos desejados</h6>
+                        <button type="button" class="close" onclick="closeUploadModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="selectTipoDocumentoUpload">
+                            <label for="documentTypeUpload">Tipo de documento <span>*</span></label>
+                            <select id="documentTypeUpload" name="documentTypeUpload">
+                                <option value="">Selecione um tipo de documento</option>
+                                <option value="1003">
+                                    1003
+                                </option>
+                            </select>
+                        </div>
+                        <div id="divUploadFileInput" name="divUploadFileInput" class="upload-container mb-32 mt-32" style="display: none;">
+                            <input type="file" id="fileInput" name="fileInput" value="${arquivos}" multiple="<%= true %>" />
+                        </div>
+                        <div id="mensagem-info-modal" class="alert fade in mb-32" style="display: none;">
+                            <i data-dismiss="alert"></i>
+                            <span class="message">Arquivos com nomes que <strong>não sejam numéricos, incompatíveis com a plataforma</strong> ou que possuem a extensão <strong>.exe, .zip ou .rar</strong> não são permitidos e por isso foram ignorados.</span>
+                        </div>
+                        <div id="mensagem-info-arquivo-repetido-modal" class="alert fade in mb-32" style="display: none;">
+                            <i data-dismiss="alert"></i>
+                            <span id="mensagemInfoArquivosRepetidos" class="message"></span>
+                        </div>
+                        <div id="fileListDiv" name="fileListDiv" style="display: none;">
+                            <table id="fileListTable" class="table table-striped">
+                                <caption style="display: none;">Resultado da consulta com os parametros solicitados</caption>
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Nome do arquivo</th>
+                                    <th>Tamanho</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody id="fileListTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="salvar" name="Salvar" class="btn btn-primary" type="submit" disabled>
+                            Salvar
+                        </button>
+                        <button id="limpar" name="limpar" class="btn btn-secondary" type="reset" disabled>
+                            Limpar
+                        </button>
+                        <p id="mensagemEnvio" style="display: none;"><strong id="porcentagem"></strong> aguarde nesta tela enquanto o envio é concluído!</p>
+                        <p id="mensagemSucesso" style="display: none;">Arquivo(s) salvo(s) com sucesso.</p>
+                        <p id="mensagemErro" style="display: none;"><strong>Não foi possível enviar os arquivos, por favor tente novamente mais tarde.</strong></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../js/repositorios/repositorios.js"></script>
+<script src="../js/repositorios/repositorios-modal.js"></script>
+</body>
+</html>
