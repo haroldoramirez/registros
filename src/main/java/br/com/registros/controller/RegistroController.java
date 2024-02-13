@@ -37,7 +37,7 @@ public class RegistroController {
     @GetMapping("/listar")
     public ModelAndView paginaListar() {
         ModelAndView mv = new ModelAndView("registros/listar");
-        List<Registro> registros = registroService.findAll();
+        List<Registro> registros = registroService.listarRegistrosPorDataDecrescente();
         List<RegistroListDTO> registrosDTO = new ArrayList<>();
         List<TotalRegistrosDTO> totalRegistrosDTO = new ArrayList<>();
 
@@ -60,7 +60,15 @@ public class RegistroController {
             String formatoDesejado = "dd/MM/yyyy HH:mm:ss";
             registroDTO.setDataCadastro(formatarLocalDateTime(registro.getDataCadastro(), formatoDesejado));
 
-            registroDTO.setStatus(formatarStatus(registro.getStatus()));
+            registroDTO.setTextoStatus(formatarStatus(registro.getStatus()));
+
+            if (registro.getStatus() == StatusRegistro.DIANA) {
+                registroDTO.setCodigoStatus(0);
+            } else if (registro.getStatus() == StatusRegistro.LIAM) {
+                registroDTO.setCodigoStatus(1);
+            } else {
+                registroDTO.setCodigoStatus(2);
+            }
 
             registrosDTO.add(registroDTO);
         }

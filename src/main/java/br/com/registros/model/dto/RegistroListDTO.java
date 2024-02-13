@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class RegistroListDTO {
 
     private String titulo;
-    private String status;
+    private String textoStatus;
+    private int codigoStatus;
     private String dataCadastro;
 
 }

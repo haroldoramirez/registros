@@ -32,8 +32,8 @@ public class RegistroServiceImpl implements RegistroService {
     }
 
     @Override
-    public List<Registro> findAll() {
-        return registroRepository.findAll();
+    public List<Registro> listarRegistrosPorDataDecrescente() {
+        return registroRepository.listarRegistrosPorDataDecrescente();
     }
 
     @Override
