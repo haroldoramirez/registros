@@ -21,10 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -46,6 +47,11 @@ public class RegistroController {
         return "registros/criar";
     }
 
+    /**
+     * metodo responsavel por listar os registros na pagina
+     *
+     * @return a ModelAndView
+     */
     @GetMapping("/listar")
     public ModelAndView paginaListar() {
         ModelAndView mv = new ModelAndView("registros/listar");
@@ -105,19 +111,27 @@ public class RegistroController {
         return "registros/exportar";
     }
 
+    /**
+     * metodo responsavel por exportar todos o registros em arquivo csv
+     *
+     * @return a ResponseEntity
+     */
     @GetMapping("/exportarRegistros")
     public ResponseEntity<InputStreamResource> exportarRegistros() {
 
         try {
 
+            Calendar agora = Calendar.getInstance();
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MMMM-yyyy");
+            String data = dataFormatada.format(agora.getTime());
             List<Registro> registros = registroService.listarRegistrosPorDataDecrescente();
 
             // Criar o arquivo CSV em memória
-            StringBuilder csvContent = new StringBuilder();
-            csvContent.append(FILE_HEADER).append(NEW_LINE_SEPARATOR);
+            StringBuilder conteudoCsv = new StringBuilder();
+            conteudoCsv.append(FILE_HEADER).append(NEW_LINE_SEPARATOR);
 
             for (Registro registro : registros) {
-                csvContent.append(registro.getTitulo()).append(COMMA_DELIMITER)
+                conteudoCsv.append(registro.getTitulo()).append(COMMA_DELIMITER)
                         .append(registro.getStatus().name()).append(COMMA_DELIMITER)
                         .append(registro.getDataCadastro()).append(COMMA_DELIMITER)
                         .append(registro.getLatitude()).append(COMMA_DELIMITER)
@@ -125,21 +139,26 @@ public class RegistroController {
             }
 
             // Converter o conteúdo CSV em um InputStream
-            InputStream inputStream = new ByteArrayInputStream(csvContent.toString().getBytes());
+            InputStream arquivoStream = new ByteArrayInputStream(conteudoCsv.toString().getBytes());
 
             // Configurar o cabeçalho da resposta HTTP
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            headers.setContentDispositionFormData("attachment", "registros.csv");
+            headers.setContentDispositionFormData("attachment", "registros-" + data + ".csv");
 
             // Retornar a resposta com o arquivo CSV
-            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
+            return new ResponseEntity<>(new InputStreamResource(arquivoStream), headers, HttpStatus.OK);
 
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(null);
         }
     }
 
+    /**
+     * metodo responsavel por salvar um registro
+     *
+     * @return a ModelAndView
+     */
     @PostMapping("/criar")
     public ModelAndView criar(RegistroDTO registroDTO) {
 
@@ -198,28 +217,6 @@ public class RegistroController {
 
         return textoStatus;
 
-    }
-
-    /**
-     * metodo responsavel por modificar o titulo do arquivo
-     *
-     * @param str identificador
-     * @return a string formatada
-     */
-    private static String formatarTitulo(String str) {
-        return Normalizer.normalize(str, Normalizer.Form.NFD)
-                .replaceAll("[^\\p{ASCII}]", "")
-                .replaceAll(" ","-")
-                .replaceAll(",", "-")
-                .replaceAll("!", "")
-                .replaceAll("/", "-")
-                .replaceAll("[?]", "")
-                .replaceAll("[%]", "")
-                .replaceAll("[']", "")
-                .replaceAll("[´]", "")
-                .replaceAll("[`]", "")
-                .replaceAll("[:]", "")
-                .toLowerCase();
     }
 
 }
