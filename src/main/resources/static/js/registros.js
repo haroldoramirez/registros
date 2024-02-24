@@ -101,4 +101,8 @@ window.onload = function() {
         modalConfirmacao.hide();
     }
 
+    function exportar() {
+        console.log("exportar()");
+    }
+
 }
