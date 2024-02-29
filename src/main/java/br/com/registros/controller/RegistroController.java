@@ -8,6 +8,7 @@ import br.com.registros.model.entity.Registro;
 import br.com.registros.model.entity.TotalRegistros;
 import br.com.registros.model.enums.StatusRegistro;
 import br.com.registros.service.RegistroService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/registros")
 public class RegistroController {
@@ -119,6 +121,8 @@ public class RegistroController {
     @GetMapping("/exportarRegistros")
     public ResponseEntity<InputStreamResource> exportarRegistros() {
 
+        log.info("Endpoint de Exportar registros");
+
         try {
 
             Calendar agora = Calendar.getInstance();
@@ -149,7 +153,7 @@ public class RegistroController {
             // Retornar a resposta com o arquivo CSV
             return new ResponseEntity<>(new InputStreamResource(arquivoStream), headers, HttpStatus.OK);
 
-        } catch (Exception e) {
+        } catch (RegraNegocioException e) {
             return ResponseEntity.internalServerError().body(null);
         }
     }
