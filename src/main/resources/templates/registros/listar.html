@@ -26,6 +26,7 @@
         </div>
 
         <button type="button" class="btn btn-primary" onclick="voltar()">Voltar</button>
+        <button type="button" class="btn btn-warning" onclick="importar()">Importar</button>
         <button type="button" class="btn btn-warning" onclick="exportar()">Exportar</button>
 
         <div class="row">
@@ -58,6 +59,9 @@
     }
     function exportar() {
         window.location.href = "/registros/exportar";
+    }
+    function importar() {
+        window.location.href = "/registros/importar";
     }
 </script>
 </body>

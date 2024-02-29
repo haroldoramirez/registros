@@ -18,9 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -47,6 +50,11 @@ public class RegistroController {
     @GetMapping("/criar")
     public String paginaCriar() {
         return "registros/criar";
+    }
+
+    @GetMapping("/importar")
+    public String paginaImportar() {
+        return "registros/importar";
     }
 
     /**
@@ -186,6 +194,35 @@ public class RegistroController {
 
             return mv;
 
+        }
+
+    }
+
+    @PostMapping("/importarRegistros")
+    public ModelAndView importarRegistros(@RequestParam("arquivo") MultipartFile file) {
+
+        log.info("Endpoint de Importar registros");
+
+        try {
+
+            ModelAndView mv = new ModelAndView("registros/sucesso");
+
+            int quantidade = registroService.processarArquivoCsv(file);
+
+            mv.addObject("registroSalvo", quantidade);
+
+            return mv;
+
+        } catch (RegraNegocioException e) {
+
+            ModelAndView mv = new ModelAndView("registros/erro");
+
+            mv.addObject("mensagem", e.getMessage());
+
+            return mv;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
