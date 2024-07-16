@@ -1,6 +1,5 @@
 package br.com.registros.model.dto;
 
-import br.com.registros.model.enums.StatusRegistro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

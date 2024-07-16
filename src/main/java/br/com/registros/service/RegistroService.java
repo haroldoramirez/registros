@@ -1,14 +1,12 @@
 package br.com.registros.service;
 
-import br.com.registros.model.entity.Registro;
-import br.com.registros.model.entity.TotalRegistros;
-import br.com.registros.model.enums.StatusRegistro;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
+import br.com.registros.model.entity.Registro;
+import br.com.registros.model.entity.TotalRegistros;
 
 public interface RegistroService {
 
